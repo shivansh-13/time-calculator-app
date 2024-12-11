@@ -80,3 +80,19 @@ h1, h2 {
   color: #ff0000;
   margin-top: 10px;
 }
+.App-footer {
+  position: absolute; /* Position the footer at the bottom of the page */
+  left: 50%; /* Center horizontally */
+  bottom: 0; /* Align at the bottom */
+  transform: translateX(-50%); /* Adjust position to truly center */
+  padding: 10px;
+  font-size: 0.8rem;
+  color: grey;
+}
+.App-footer a {
+  color: grey;
+  text-decoration: none;
+}
+.App-footer a:hover {
+  text-decoration: underline;
+}

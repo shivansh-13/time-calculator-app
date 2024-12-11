@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { calculateEndTime } from 'start-end-time-duration-calculator';
-import confetti from 'canvas-confetti';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { calculateEndTime } from "start-end-time-duration-calculator";
+import confetti from "canvas-confetti";
+import "./App.css";
 
 function App() {
-  const [startTime, setStartTime] = useState('');
-  const [washingDuration, setWashingDuration] = useState('');
-  const [hoursToSet, setHoursToSet] = useState('');
-  const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
-  const [dateOption, setDateOption] = useState('today');
-  const [customDate, setCustomDate] = useState(''); // Added state for customDate
-  const [hour, setHour] = useState('');
-  const [minute, setMinute] = useState('');
-  const [ampm, setAmpm] = useState('AM');
+  const [startTime, setStartTime] = useState("");
+  const [washingDuration, setWashingDuration] = useState("");
+  const [hoursToSet, setHoursToSet] = useState("");
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toLocaleTimeString()
+  );
+  const [dateOption, setDateOption] = useState("today");
+  const [customDate, setCustomDate] = useState(""); // Added state for customDate
+  const [hour, setHour] = useState("");
+  const [minute, setMinute] = useState("");
+  const [ampm, setAmpm] = useState("AM");
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -28,14 +30,16 @@ function App() {
 
   const handleTimeChange = () => {
     try {
-      const date = dateOption === 'today' ? new Date() : new Date(Date.now() + 86400000);
-      const formattedHour = ampm === 'PM' ? (parseInt(hour) % 12 + 12) : parseInt(hour);
-      const formattedMinute = minute.padStart(2, '0'); // Treating 0 as 00
+      const date =
+        dateOption === "today" ? new Date() : new Date(Date.now() + 86400000);
+      const formattedHour =
+        ampm === "PM" ? (parseInt(hour) % 12) + 12 : parseInt(hour);
+      const formattedMinute = minute.padStart(2, "0"); // Treating 0 as 00
       date.setHours(formattedHour);
       date.setMinutes(formattedMinute);
       setStartTime(date.toISOString());
     } catch (error) {
-      console.error('Invalid time value', error);
+      console.error("Invalid time value", error);
     }
   };
 
@@ -48,7 +52,7 @@ function App() {
       const now = new Date();
       const end = new Date(endTime);
 
-      const diffInMinutes = ((end - now) / 60000) + parseInt(washingDuration);
+      const diffInMinutes = (end - now) / 60000 + parseInt(washingDuration);
       const hours = Math.ceil(diffInMinutes / 60);
       setHoursToSet(hours);
 
@@ -63,7 +67,7 @@ function App() {
         origin: { y: 1.0, x: 1.0 }, // Bottom right corner
       });
     } else {
-      console.error('Start time is invalid.');
+      console.error("Start time is invalid.");
     }
   };
 
@@ -75,13 +79,17 @@ function App() {
           <p>Current Time: {currentTime}</p>
         </div>
         <form onSubmit={handleSubmit} className="form">
-          <select value={dateOption} onChange={handleDateChange} className="dropdown">
+          <select
+            value={dateOption}
+            onChange={handleDateChange}
+            className="dropdown"
+          >
             <option value="today">Today</option>
             <option value="tomorrow">Tomorrow</option>
             <option value="custom">Custom</option>
           </select>
-          {dateOption === 'custom' && (
-            <input 
+          {dateOption === "custom" && (
+            <input
               type="datetime-local"
               value={customDate}
               onChange={(e) => {
@@ -91,7 +99,7 @@ function App() {
               className="custom-date-input"
             />
           )}
-          <input 
+          <input
             type="number"
             min="1"
             max="12"
@@ -100,7 +108,7 @@ function App() {
             onChange={(e) => setHour(e.target.value)}
             className="time-input"
           />
-          <input 
+          <input
             type="number"
             min="0"
             max="59"
@@ -109,18 +117,24 @@ function App() {
             onChange={(e) => setMinute(e.target.value)}
             className="time-input"
           />
-          <select value={ampm} onChange={(e) => setAmpm(e.target.value)} className="dropdown">
+          <select
+            value={ampm}
+            onChange={(e) => setAmpm(e.target.value)}
+            className="dropdown"
+          >
             <option value="AM">AM</option>
             <option value="PM">PM</option>
           </select>
-          <input 
-            type="number" 
+          <input
+            type="number"
             placeholder="Duration (minutes)"
             value={washingDuration}
             onChange={(e) => setWashingDuration(e.target.value)}
             className="duration-input"
           />
-          <button type="submit" className="submit-button">Calculate</button>
+          <button type="submit" className="submit-button">
+            Calculate
+          </button>
         </form>
         {hoursToSet && (
           <div className="result">
@@ -128,6 +142,20 @@ function App() {
           </div>
         )}
       </header>
+      <footer className="App-footer">
+        {" "}
+        <p>
+          made by{" "}
+          <a
+            href="https://www.linkedin.com/in/shivansh-shrivastava-716013205/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Shivansh
+          </a>{" "}
+          with love ❤️
+        </p>{" "}
+      </footer>
     </div>
   );
 }
