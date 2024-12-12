@@ -51,10 +51,10 @@ function App() {
       const endTime = calculateEndTime(startTime, washingDuration);
       const now = new Date();
       const end = new Date(endTime);
-
-      const diffInMinutes = (end - now) / 60000 + parseInt(washingDuration);
-      const hours = Math.ceil(diffInMinutes / 60);
-      setHoursToSet(hours);
+      const diffInMilliseconds = end - now;
+      const diffInHours = (diffInMilliseconds / (1000 * 60 * 60));
+      const roundedHours = diffInHours % 1 >= 0.5 ? Math.floor(diffInHours) : Math.ceil(diffInHours);
+      setHoursToSet(roundedHours);
 
       confetti({
         particleCount: 300,

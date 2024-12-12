@@ -1,6 +1,6 @@
 {
   "name": "time-calculator-app",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage": "https://shivansh-13.github.io/time-calculator-app",
   "private": true,
   "dependencies": {
